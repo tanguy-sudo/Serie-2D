@@ -30255,6 +30255,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7015228772581510392}
   m_PrefabAsset: {fileID: 0}
+--- !u!70 &1660116358 stripped
+CapsuleCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7015228770925760894, guid: 942acddd4bb53c448b3eed675b919145,
+    type: 3}
+  m_PrefabInstance: {fileID: 7015228772581510392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1897216119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30618,7 +30624,7 @@ PrefabInstance:
     - target: {fileID: 3384724576713025713, guid: 5a982008405d71540b7b05c5f4347dd7,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a982008405d71540b7b05c5f4347dd7, type: 3}
@@ -30717,6 +30723,16 @@ PrefabInstance:
         type: 3}
       propertyPath: isClimbing
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7015228770925760880, guid: 942acddd4bb53c448b3eed675b919145,
+        type: 3}
+      propertyPath: playerCollider
+      value: 
+      objectReference: {fileID: 1660116358}
+    - target: {fileID: 7015228770925760881, guid: 942acddd4bb53c448b3eed675b919145,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7015228770925760882, guid: 942acddd4bb53c448b3eed675b919145,
         type: 3}

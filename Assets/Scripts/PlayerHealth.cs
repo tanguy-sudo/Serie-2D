@@ -45,6 +45,13 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth -= damage;
             healthBar.SetHealth(currentHealth);
+
+            if(currentHealth <= 0)
+            {
+                Die();
+                return;
+            }
+
             isInvincible = true;
             StartCoroutine(InvincibilityFlash());
             StartCoroutine(HandleInvicibilityDelay());
@@ -80,5 +87,18 @@ public class PlayerHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(invicibilityTimeAfterHit);
         isInvincible = false;
+    }
+
+    public void Die()
+    {
+        // Bloquer les mouvements du personnage
+        PlayerMovement.instance.enabled = false;
+
+        // Jouer l'annimation d'élimination
+        PlayerMovement.instance.animator.SetTrigger("Die");
+
+        // Empêcher les intéractions physique avec les autres éléments de la scène
+        PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
+        PlayerMovement.instance.playerCollider.enabled = false;
     }
 }
