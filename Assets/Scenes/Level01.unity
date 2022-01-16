@@ -31318,7 +31318,7 @@ PrefabInstance:
     - target: {fileID: 3384724576984832727, guid: 5a982008405d71540b7b05c5f4347dd7,
         type: 3}
       propertyPath: damegeOnCollision
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5a982008405d71540b7b05c5f4347dd7, type: 3}

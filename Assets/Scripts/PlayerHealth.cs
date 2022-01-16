@@ -99,6 +99,7 @@ public class PlayerHealth : MonoBehaviour
 
         // Empêcher les intéractions physique avec les autres éléments de la scène
         PlayerMovement.instance.rb.bodyType = RigidbodyType2D.Kinematic;
+        PlayerMovement.instance.rb.velocity = Vector3.zero;
         PlayerMovement.instance.playerCollider.enabled = false;
 
         GameOverManager.instance.OnPlayerDeath();
