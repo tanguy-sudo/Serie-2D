@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     public static bool gameIsPaused = false;
 
     public GameObject pauseMenuUI;
+    public GameObject settingsWindow;
 
     void Update()
     {
@@ -41,6 +42,16 @@ public class PauseMenu : MonoBehaviour
         // stoppe le temps
         Time.timeScale = 0;
         gameIsPaused = true;
+    }
+
+    public void OpenSettingsWindow()
+    {
+        this.settingsWindow.SetActive(true);
+    }
+
+    public void CloseSettingsWindow()
+    {
+        this.settingsWindow.SetActive(false);
     }
 
     public void loadMainMenu()
