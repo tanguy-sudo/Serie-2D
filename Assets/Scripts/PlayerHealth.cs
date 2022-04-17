@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
 
     public SpriteRenderer graphics;
     public HealthBar healthBar;
+    public AudioClip hitSound;
+    public AudioClip dieSound;
 
     public static PlayerHealth instance;
 
@@ -43,11 +45,13 @@ public class PlayerHealth : MonoBehaviour
     {
         if (!isInvincible)
         {
+            AudioManager.instance.PlayClipAt(hitSound, transform.position);
             currentHealth -= damage;
             healthBar.SetHealth(currentHealth);
 
             if(currentHealth <= 0)
             {
+                AudioManager.instance.PlayClipAt(dieSound, transform.position);
                 Die();
                 return;
             }
