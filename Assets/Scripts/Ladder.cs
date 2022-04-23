@@ -3,15 +3,17 @@ using UnityEngine.UI;
 
 public class Ladder : MonoBehaviour
 {
-    public bool isInRange;
+    private bool isInRange;
     private PlayerMovement playerMovement;
+    private Text interactUi;
+
     public BoxCollider2D topCollider;
-    public Text interactUi;
 
 
     // Start is called before the first frame update
     void Awake()
     {
+        isInRange = false;
         playerMovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
         interactUi = GameObject.FindGameObjectWithTag("InteractUI").GetComponent<Text>();
     }
