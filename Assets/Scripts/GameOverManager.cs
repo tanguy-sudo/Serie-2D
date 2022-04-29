@@ -10,7 +10,7 @@ public class GameOverManager : MonoBehaviour
     {
         if (instance != null)
         {
-            Debug.LogWarning("Il y a plus d'une instance de GameOverManager dans la scène");
+            Debug.LogError("Il y a plus d'une instance de GameOverManager dans la scène");
             return;
         }
 
@@ -18,10 +18,6 @@ public class GameOverManager : MonoBehaviour
     }
     public void OnPlayerDeath()
     {
-        if (CurrentSceneManager.instance.isPlayerPresentByDefault)
-        {
-            DontDestroyOnLoadScene.instance.RemoveFromDontDestroyOnLoad();
-        }
         gameOverUi.SetActive(true);
     }
 
@@ -36,7 +32,6 @@ public class GameOverManager : MonoBehaviour
     public void MainMenuButton()
     {
         // Retour au menu principale
-        DontDestroyOnLoadScene.instance.RemoveFromDontDestroyOnLoad();
         SceneManager.LoadScene("MainMenu");
     }
     public void QuidButton()

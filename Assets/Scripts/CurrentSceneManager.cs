@@ -2,18 +2,21 @@ using UnityEngine;
 
 public class CurrentSceneManager : MonoBehaviour
 {
-    public bool isPlayerPresentByDefault = false;
     public int coinsPicketUpInThisSceneCount;
+    public Vector3 respawnpoint;
+
     public static CurrentSceneManager instance;
 
     private void Awake()
     {
         if (instance != null)
         {
-            Debug.LogWarning("Il y a plus d'une instance de CurrentSceneManager dans la scène");
+            Debug.LogError("Il y a plus d'une instance de CurrentSceneManager dans la scène");
             return;
         }
 
         instance = this;
+
+        respawnpoint = GameObject.FindGameObjectWithTag("Player").transform.position;
     }
 }
