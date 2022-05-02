@@ -4,7 +4,7 @@ using System.Collections;
 public class LoadSpecificScene : MonoBehaviour
 {
     public string sceneName;
-    public Animator fadeSystem;
+    private Animator fadeSystem;
     public AudioClip loadSceneSound;
 
     private void Awake()
@@ -22,6 +22,7 @@ public class LoadSpecificScene : MonoBehaviour
 
     public IEnumerator loadNextScene()
     {
+        LoadAndSaveData.instance.SaveData();
         fadeSystem.SetTrigger("FadeIn");
         AudioManager.instance.PlayClipAt(loadSceneSound, transform.position);
         yield return new WaitForSeconds(1f);
