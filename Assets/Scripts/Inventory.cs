@@ -6,9 +6,17 @@ public class Inventory : MonoBehaviour
     public int coinsCount;
     public Text coinsCountText;
     public List<Item> content = new List<Item>();
-    public int contentCurrentIndex = 0;
+    public int contentCurrentIndex;
+    public Image itemImageUI;
+    public Sprite emptyItemImage;
+    public Text itemNameUI;
 
     public static Inventory instance;
+    private void Start()
+    {
+        contentCurrentIndex = 0;
+        UpdateInventoryUI();
+    }
 
     private void Awake()
     {
@@ -23,28 +31,60 @@ public class Inventory : MonoBehaviour
 
     public void ConsumeItem()
     {
+        if (content.Count == 0)
+        {
+            return;
+        }
+           
         Item currentItem = content[contentCurrentIndex];
         PlayerHealth.instance.HealPlayer(currentItem.hpGiven);
         PlayerMovement.instance.moveSpeed += currentItem.speedGiven;
         content.Remove(currentItem);
         GetNextItem();
+        UpdateInventoryUI();
+        
     }
 
     public void GetNextItem()
     {
+        if (content.Count == 0)
+        {
+            return;
+        }
+
         contentCurrentIndex++;
         if (contentCurrentIndex > content.Count - 1)
         {
             contentCurrentIndex = 0;
         }
+        UpdateInventoryUI();
     }
 
     public void GetPreviousItem()
     {
+        if (content.Count == 0)
+        {
+            return;
+        }
+
         contentCurrentIndex--;
         if (contentCurrentIndex < 0)
         {
             contentCurrentIndex = content.Count - 1;
+        }
+        UpdateInventoryUI();
+    }
+
+    private void UpdateInventoryUI()
+    {
+        if(content.Count > 0)
+        {
+            itemImageUI.sprite = content[contentCurrentIndex].image;
+            itemNameUI.text = content[contentCurrentIndex].name;
+        } else
+        {
+            itemImageUI.sprite = emptyItemImage;
+            itemNameUI.text = "";
         }
     }
 
