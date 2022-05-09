@@ -18,7 +18,7 @@ public class LoadAndSaveData : MonoBehaviour
     void Start()
     {
         Inventory.instance.coinsCount = PlayerPrefs.GetInt("coinsCount", 0);
-        Inventory.instance.UpdateTextUI();
+        Inventory.instance.UpdateInventorytUI();
 
         /*
          * int currentHealth = PlayerPrefs.GetInt("currentHealth", PlayerHealth.instance.maxHealth);

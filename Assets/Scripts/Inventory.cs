@@ -3,19 +3,21 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 public class Inventory : MonoBehaviour
 {
+    public PlayerEffects playerEffects;
     public int coinsCount;
     public Text coinsCountText;
     public List<Item> content = new List<Item>();
-    public int contentCurrentIndex;
+    private int contentCurrentIndex;
     public Image itemImageUI;
     public Sprite emptyItemImage;
     public Text itemNameUI;
 
     public static Inventory instance;
+
     private void Start()
     {
         contentCurrentIndex = 0;
-        UpdateInventoryUI();
+        UpdateTextUI();
     }
 
     private void Awake()
@@ -38,10 +40,10 @@ public class Inventory : MonoBehaviour
            
         Item currentItem = content[contentCurrentIndex];
         PlayerHealth.instance.HealPlayer(currentItem.hpGiven);
-        PlayerMovement.instance.moveSpeed += currentItem.speedGiven;
+        playerEffects.AddSpeed(currentItem.speedGiven, currentItem.speedDuration);
         content.Remove(currentItem);
         GetNextItem();
-        UpdateInventoryUI();
+        UpdateTextUI();
         
     }
 
@@ -57,7 +59,7 @@ public class Inventory : MonoBehaviour
         {
             contentCurrentIndex = 0;
         }
-        UpdateInventoryUI();
+        UpdateTextUI();
     }
 
     public void GetPreviousItem()
@@ -72,10 +74,10 @@ public class Inventory : MonoBehaviour
         {
             contentCurrentIndex = content.Count - 1;
         }
-        UpdateInventoryUI();
+        UpdateTextUI();
     }
 
-    private void UpdateInventoryUI()
+    public void UpdateTextUI()
     {
         if(content.Count > 0)
         {
@@ -91,16 +93,16 @@ public class Inventory : MonoBehaviour
     public void AddCoins(int count)
     {
         coinsCount += count;
-        UpdateTextUI();
+        UpdateInventorytUI();
     }
 
     public void removeCoins(int count)
     {
         coinsCount -= count;
-        UpdateTextUI();
+        UpdateInventorytUI();
     }
 
-    public void UpdateTextUI()
+    public void UpdateInventorytUI()
     {
         coinsCountText.text = coinsCount.ToString();
     }
