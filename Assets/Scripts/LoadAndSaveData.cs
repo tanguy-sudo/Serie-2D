@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Linq;
 
 public class LoadAndSaveData : MonoBehaviour
 {
@@ -24,8 +25,23 @@ public class LoadAndSaveData : MonoBehaviour
          * int currentHealth = PlayerPrefs.GetInt("currentHealth", PlayerHealth.instance.maxHealth);
          * PlayerHealth.instance.currentHealth = currentHealth;
          * PlayerHealth.instance.healthBar.SetHealth(currentHealth);
-         * 
         */
+
+        // Chargement des items
+        string[] itemsSaved = PlayerPrefs.GetString("inventoryItems", "").Split(',');
+
+        for (int i = 0; i < itemsSaved.Length; i++)
+        {
+            if(itemsSaved[i] != "")
+            {
+                // Ajoute l'item à l'inventaire
+                int id = int.Parse(itemsSaved[i]);
+                Item currentItem = ItemsDatabase.instance.allItems.Single(item => item.id == id);
+                Inventory.instance.content.Add(currentItem);
+            }
+        }
+
+        Inventory.instance.UpdateTextUI();
     }
 
     public void SaveData()
@@ -36,7 +52,12 @@ public class LoadAndSaveData : MonoBehaviour
         {
             PlayerPrefs.SetInt("levelReached", CurrentSceneManager.instance.levelToUnlock);
         }
-         
+
         // PlayerPrefs.SetInt("currentHealth", PlayerHealth.instance.currentHealth);
+
+        // Sauvegarde des items
+        string itemsInInventory = string.Join(",", Inventory.instance.content.Select(item => item.id));
+        PlayerPrefs.SetString("inventoryItems", itemsInInventory);
+
     }
 }
